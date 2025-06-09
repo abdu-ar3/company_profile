@@ -45,9 +45,7 @@
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
     <div class="container">
-        <a class="navbar-brand logo-image" href="/">
-            <img src="{{ asset('assets/user/images/logo.svg') }}" alt="Logo">
-        </a>
+            <img class="img-fluid" src="{{ asset('assets/img/custom/profile.png') }}" alt="logo" width="120px">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-awesome fas fa-bars"></span>
             <span class="navbar-toggler-awesome fas fa-times"></span>
