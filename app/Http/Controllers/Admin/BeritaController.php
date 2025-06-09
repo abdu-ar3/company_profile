@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Berita;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Session;
 
 class BeritaController extends Controller
 {
@@ -43,7 +44,7 @@ class BeritaController extends Controller
         ]);
 
         if ($request->hasFile('gambar')) {
-            $data['gambar'] = $request->file('gambar')->store('berita', 'public');
+            $data['gambar'] = $request->file('gambar')->store('beritas', 'public');
         }
 
         Berita::create($data);
@@ -86,14 +87,16 @@ class BeritaController extends Controller
         return redirect()->route('berita.index')->with('success', 'Berita berhasil diperbarui');
     }
 
-    public function destroy(Berita $berita)
+    public function destroy($id)
     {
-        if ($berita->image) {
-            Storage::disk('public')->delete($berita->image);
-        }
+        $berita = Berita::findOrFail($id);
 
+         // Menghapus berita dari database
         $berita->delete();
 
-        return redirect()->route('berita.index')->with('success', 'Berita berhasil dihapus');
+        // Menambahkan notifikasi
+        Session::flash('success', 'Berita berhasil dihapus!');
+
+        return redirect()->route('admin.berita.index')->with('success', 'Berita berhasil dihapus');
     }
 }

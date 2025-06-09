@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\LamaranController;
 use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 
@@ -14,9 +15,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::get('/', function () {
-//     return view('home');
-// });
 
 
 
@@ -26,8 +24,6 @@ Route::get('/home', [AuthController::class, 'home'])->name('home');
 Route::get('/admin/dashboard', [AuthController::class, 'dashboard'])->name('dashboard');
 
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
-
-
 
 
 Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
@@ -40,3 +36,5 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
     Route::resource('kontak', \App\Http\Controllers\Admin\KontakController::class);
 });
 
+Route::get('lamaran/create', [\App\Http\Controllers\User\LamaranController::class, 'create'])->name('lamaran.create');
+Route::post('lamaran', [\App\Http\Controllers\User\LamaranController::class, 'store'])->name('lamaran.store');

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\PesanKontak;
 use Illuminate\Http\Request;
 
 class KontakController extends Controller
@@ -28,7 +29,23 @@ class KontakController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Validasi input
+        $request->validate([
+            'nama' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
+            'pesan' => 'required|string',
+        ]);
+
+        // Menyimpan pesan ke dalam database
+        PesanKontak::create([
+            'nama' => $request->nama,
+            'email' => $request->email,
+            'pesan' => $request->pesan,
+            'tanggal' => now(),
+        ]);
+
+        // Menampilkan pesan sukses setelah form dikirim
+        return redirect()->route('home')->with('success', 'Pesan Anda telah terkirim!');
     }
 
     /**

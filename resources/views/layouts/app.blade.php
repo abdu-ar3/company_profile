@@ -79,10 +79,10 @@
                             <a class="btn-solid-lg page-scroll" href="#produk">Lihat Produk</a>
                         </div>
                     </div>
-                    <div class="col-lg-6 col-xl-7">
+                    <div class="col-lg-6 col-xl-6 ml-2">
                         <div class="image-container">
                             <div class="img-wrapper">
-                                <img class="img-fluid" src="{{ asset('assets/user/images/header-software-app.png') }}" alt="alternative">
+                                <img class="img-fluid" src="{{ asset('assets/img/custom/emergency.png') }}" alt="alternative" width="500PX">
                             </div>
                         </div>
                     </div>
@@ -105,13 +105,13 @@
             <div class="row">
                 <div class="col-md-4">
                     <div class="footer-col first">
-                        <h4>About Tivo</h4>
-                        <p class="p-small">We're passionate about designing and developing one of the best marketing apps in the market</p>
+                        <h4>About CV Lestari Electric</h4>
+                        <p class="p-small">Electric Market</p>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="footer-col middle">
-                        <h4>Important Links</h4>
+                        <!-- <h4>Important Links</h4>
                         <ul class="list-unstyled li-space-lg p-small">
                             <li class="media">
                                 <i class="fas fa-square"></i>
@@ -121,20 +121,15 @@
                                 <i class="fas fa-square"></i>
                                 <div class="media-body">Read our <a class="white" href="terms-conditions.html">Terms & Conditions</a>, <a class="white" href="privacy-policy.html">Privacy Policy</a></div>
                             </li>
-                        </ul>
+                        </ul> -->
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="footer-col last">
-                        <h4>Contact</h4>
+                        <h4>Address</h4>
                         <ul class="list-unstyled li-space-lg p-small">
                             <li class="media">
-                                <i class="fas fa-map-marker-alt"></i>
-                                <div class="media-body">22 Innovative, San Francisco, CA 94043, US</div>
-                            </li>
-                            <li class="media">
-                                <i class="fas fa-envelope"></i>
-                                <div class="media-body"><a class="white" href="mailto:contact@tivo.com">contact@tivo.com</a> <i class="fas fa-globe"></i><a class="white" href="#your-link">www.tivo.com</a></div>
+                                <div class="media-body">City, Golden Boulevard, Blk. F1 Jl. Komp. BSD No.9, Lengkong Karya, Tangerang, Kota Tangerang Selatan, Banten 15310</div>
                             </li>
                         </ul>
                     </div> 
@@ -148,14 +143,18 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                    <p class="p-small">Copyright © 2020 <a href="https://inovatik.com">Template by Inovatik</a><br>
-                        Distributed By <a href="https://themewagon.com" target="_blank">ThemeWagon</a>
+                    <p class="p-small">Copyright © 2025 <a href="https://inovatik.com"></a><br>
                     </p>
                 </div>
             </div>
         </div>
     </div>
     
+     <!-- Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
     <!-- Scripts -->
     <script src="{{ asset('assets/user/js/jquery.min.js') }}"></script>
     <script src="{{ asset('assets/user/js/popper.min.js') }}"></script>

@@ -43,7 +43,7 @@ class LamaranController extends Controller
         ]);
 
 
-        return redirect()->route('lamaran.index')->with('success', 'Lamaran berhasil ditambahkan.');
+        return redirect()->route('admin.lamaran.index')->with('success', 'Lamaran berhasil ditambahkan.');
     }
 
     public function destroy(Lamaran $lamaran)

@@ -133,7 +133,7 @@
                                     <div class="basic-1">
                                         <div class="container">
                                             <div class="row">
-                                                <div class="col-lg-6">
+                                                <div class="col-lg-8">
                                                     <div class="text-container">
                                                         <h2>Lowongan Kerja</h2>
                                                         <h5>{{ $item->posisi }}</h5>
@@ -152,9 +152,9 @@
                                                         <a class="btn-solid-reg page-scroll" href="sign-up.html">Apply Now</a>
                                                     </div> <!-- end of text-container -->
                                                 </div> <!-- end of col -->
-                                                <div class="col-lg-6">
+                                                <div class="col-lg-4">
                                                     <div class="image-container">
-                                                        <img class="img-fluid" src="{{ asset('assets/images/details.png') }}" alt="alternative">
+                                                        <img class="img-fluid" src="{{ asset('assets/img/custom/bergabung.png') }}" alt="alternative">
                                                     </div> <!-- end of image-container -->
                                                 </div> <!-- end of col -->
                                             </div> <!-- end of row -->
@@ -200,6 +200,7 @@
     </section>
 
     <!-- Section: Kontak -->
+     
     <section id="kontak" class="mt-5">
         <h2 class="text-center text-primary">Kontak Kami</h2>
         <form action="" method="POST">

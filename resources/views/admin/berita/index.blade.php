@@ -4,7 +4,12 @@
 <div class="container">
     <a href="{{ route('admin.berita.create') }}" class="btn btn-primary mb-3">Tambah Berita</a>
 
-    dd('$beritas')
+    @if(session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
+    
     @foreach ($beritas as $berita)
         <div class="card mb-3">
             <div class="card-body">
@@ -13,8 +18,8 @@
                 <p><strong>Jenis:</strong> {{ $berita->jenis_berita }}</p>
                 <p><strong>Tanggal:</strong> {{ \Carbon\Carbon::parse($berita->tanggal)->format('d M Y') }}</p>
 
-                @if ($berita->image)
-                    <img src="{{ asset('storage/' . $berita->image) }}" width="150" alt="Gambar Berita">
+                @if ($berita->gambar)
+                    <img src="{{ asset('storage/' . $berita->gambar) }}" width="150" alt="Gambar Berita">
                 @endif
 
                 <div class="mt-2">
