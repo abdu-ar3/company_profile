@@ -28,7 +28,7 @@
     <link href="{{ asset('assets/user/css/styles.css') }}" rel="stylesheet">
     
     <!-- Favicon -->
-    <link rel="icon" href="{{ asset('assets/user/images/favicon.png') }}">
+    <link rel="icon" href="{{ asset('assets/img/custom/profile.png') }}">
 </head>
 <body data-spy="scroll" data-target=".fixed-top">
     
@@ -58,6 +58,7 @@
                 <li class="nav-item"><a class="nav-link page-scroll" href="#karier">Karier</a></li>
                 <li class="nav-item"><a class="nav-link page-scroll" href="#berita">Berita</a></li>
                 <li class="nav-item"><a class="nav-link page-scroll" href="#kontak">Kontak</a></li>
+                <li class="nav-item"><a class="nav-link page-scroll" href="{{ route('login') }}">Login</a></li>
             </ul>
             <span class="nav-item">
             </span>
@@ -109,17 +110,7 @@
                 </div>
                 <div class="col-md-4">
                     <div class="footer-col middle">
-                        <!-- <h4>Important Links</h4>
-                        <ul class="list-unstyled li-space-lg p-small">
-                            <li class="media">
-                                <i class="fas fa-square"></i>
-                                <div class="media-body">Our business partners <a class="white" href="#your-link">startupguide.com</a></div>
-                            </li>
-                            <li class="media">
-                                <i class="fas fa-square"></i>
-                                <div class="media-body">Read our <a class="white" href="terms-conditions.html">Terms & Conditions</a>, <a class="white" href="privacy-policy.html">Privacy Policy</a></div>
-                            </li>
-                        </ul> -->
+                       
                     </div>
                 </div>
                 <div class="col-md-4">

@@ -18,9 +18,10 @@ use Illuminate\Support\Facades\Route;
 
 
 
+
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('loginShow');
 Route::post('/login', [AuthController::class, 'login'])->name('login');
-Route::get('/home', [AuthController::class, 'home'])->name('home');
+Route::get('/', [AuthController::class, 'home'])->name('home');
 Route::get('/admin/dashboard', [AuthController::class, 'dashboard'])->name('dashboard');
 
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');

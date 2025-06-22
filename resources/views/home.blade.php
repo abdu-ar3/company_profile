@@ -186,6 +186,7 @@
 
 
 
+
    <div class="form">
     <div class="container">
         <div class="row">
@@ -193,6 +194,12 @@
                 <div class="text-container">
                     <h2>Kontak Kami</h2>
 
+                    <!-- Pesan sukses -->
+                    @if (session('success'))
+                        <div class="alert alert-success text-center">
+                            {{ session('success') }}
+                        </div>
+                    @endif
                     <!-- Kontak Form -->
                     <form id="kontakForm" method="POST" action="{{ route('admin.kontak.store') }}" data-toggle="validator" data-focus="false">
                         @csrf
