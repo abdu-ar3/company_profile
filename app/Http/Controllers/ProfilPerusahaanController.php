@@ -1,18 +1,16 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use App\Models\ProfilPerusahaan;
 use Illuminate\Http\Request;
 
-class ProfilController extends Controller
+class ProfilPerusahaanController extends Controller
 {
-
+   
     public function index()
     {
-        $profils = ProfilPerusahaan::all();
-        return view('admin.profil.index', compact('profils'));
+        dd('test');
     }
 
     public function create()

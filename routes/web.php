@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\Admin\BeritaController;
 use App\Http\Controllers\Admin\LamaranController;
+use App\Http\Controllers\Admin\ProfilController;
 use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 
@@ -28,8 +30,12 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 
 Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
+
     Route::resource('produk', \App\Http\Controllers\Admin\ProdukController::class);
-    Route::resource('berita', \App\Http\Controllers\Admin\BeritaController::class);
+    Route::resource('profil', ProfilController::class);
+    Route::resource('berita', BeritaController::class)->parameters([
+        'berita' => 'berita'
+    ]);
     Route::resource('kategori-produk', \App\Http\Controllers\Admin\KategoriProdukController::class);
     Route::resource('lowongan', \App\Http\Controllers\Admin\LowonganController::class);
     Route::resource('lamaran', \App\Http\Controllers\Admin\LamaranController::class);

@@ -3,6 +3,12 @@
 @section('content')
 <div class="container">
     <h3>Data Lamaran</h3>
+        @if(session('success'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{ session('success') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        @endif
     <a href="{{ route('admin.lamaran.create') }}" class="btn btn-primary mb-3">Tambah Lamaran</a>
 
     <table class="table table-bordered">

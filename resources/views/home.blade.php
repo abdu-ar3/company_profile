@@ -2,39 +2,45 @@
 
 @section('content')
 
-
     <!-- Video -->
     <div id="video" class="basic-2">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
 
-                    <!-- Video Preview -->
-                    <div class="image-container">
-                        <div class="video-wrapper">
-                            <a class="popup-youtube" href="https://www.youtube.com/watch?v=fLCjQJCekTs" data-effect="fadeIn">
-                               <img class="img-fluid" src="{{ asset('assets/img/custom/emergency.png') }}" alt="alternative" width="200PX">
-
-                                <span class="video-play-button">
-                                    <span></span>
-                                </span>
-                            </a>
-                        </div> <!-- end of video-wrapper -->
-                    </div> <!-- end of image-container -->
-                    <!-- end of video preview -->
-                    <div class="card-image">
-                        <img class="img-fluid" src="{{ asset('assets/img/custom/profile.png') }}" alt="alternative">
-                    </div>
-                        <h2 class="h2-heading">Tentang Kami</h2>
-                        <p>PT Lestari Elektrik didirikan pada tahun 2000 dengan tujuan menyediakan solusi peralatan industri berkualitas tinggi</p>
+                <!-- Video Preview -->
+                <div class="image-container">
+                    <div class="video-wrapper">
+                        <a class="popup-youtube" href="https://www.youtube.com/watch?v=fLCjQJCekTs" data-effect="fadeIn">
+                            <img class="img-fluid" src="{{ asset('assets/img/custom/emergency.png') }}" alt="alternative" width="200PX">
+                            <span class="video-play-button"><span></span></span>
+                        </a>
                     </div>
                 </div>
-                    <div class="p-heading">What better way to show off Tivo marketing automation saas app than presenting you some great situations of each module and tool available to users in a video</div>        
-                </div> <!-- end of col -->
-            </div> <!-- end of row -->
-        </div> <!-- end of container -->
-    </div> <!-- end of basic-2 -->
-    <!-- end of video -->
+
+                <div class="card-image mb-4">
+                    <img class="img-fluid" src="{{ asset('assets/img/custom/profile.png') }}" alt="alternative">
+                </div>
+
+                <h2 class="h2-heading">Tentang Kami</h2>
+
+                @if($profils['sejarah'][0] ?? false)
+                    <p><strong>Sejarah:</strong><br>{!! nl2br(e($profils['sejarah'][0]->isi)) !!}</p>
+                @endif
+
+                @if($profils['visi'][0] ?? false)
+                    <p><strong>Visi:</strong><br>{!! nl2br(e($profils['visi'][0]->isi)) !!}</p>
+                @endif
+
+                @if($profils['misi'][0] ?? false)
+                    <p><strong>Misi:</strong><br>{!! nl2br(e($profils['misi'][0]->isi)) !!}</p>
+                @endif
+
+            </div>
+        </div>
+    </div>
+</div>
+
 
     
 <section id="produk" class="mt-4">
@@ -98,16 +104,8 @@
                                                         <h5>{{ $item->posisi }}</h5>
                                                         <p>{{ $item->kualifikasi }}</p>
                                                         <p>{{ $item->deskripsi }}</p>
-                                                        <p>Target the right customers for your business with the help of Tivo's patented segmentation technology and deploy efficient marketing campaigns. Keep your customers happy and loyal.</p>
                                                         <ul class="list-unstyled li-space-lg">
-                                                            <li class="media">
-                                                                <i class="fas fa-square"></i>
-                                                                <div class="media-body">Understand customers and meet their requirements</div>
-                                                            </li>
-                                                            <li class="media">
-                                                                <i class="fas fa-square"></i>
-                                                                <div class="media-body">Targeted client base with Tivo's efficient technology</div>
-                                                            </li>
+                                                           
                                                         </ul>
                                                         <!-- Tombol untuk membuka modal -->
                                                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#lamaranModal">

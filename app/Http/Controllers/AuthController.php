@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Berita;
+use App\Models\Lamaran;
 use App\Models\Lowongan;
 use App\Models\Produk;
+use App\Models\ProfilPerusahaan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -44,13 +46,22 @@ class AuthController extends Controller
         $lowongan = Lowongan::latest()->take(5)->get();
         $berita = Berita::latest()->take(6)->get();
 
-        return view('home', compact('produk', 'lowongan', 'berita'));
+        $profils = ProfilPerusahaan::all()->groupBy('jenis');
+
+        return view('home', compact('produk', 'lowongan', 'berita', 'profils'));
     }
     
     public function dashboard()
     {
 
-        return view('admin.dashboard');
+        $jumlahProduk = Produk::count();
+        $jumlahLowongan = Lowongan::count();
+        $jumlahLamaran = Lamaran::count();
+        $jumlahBerita = Berita::count();
+
+        return view('admin.dashboard', compact(
+            'jumlahProduk', 'jumlahLowongan', 'jumlahLamaran', 'jumlahBerita'
+        ));
     }
 
     public function logout(Request $request)

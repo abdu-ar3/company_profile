@@ -8,4 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class ProfilPerusahaan extends Model
 {
     use HasFactory;
+
+    protected $table = 'profil_perusahaans';
+
+    protected $fillable = [
+        'judul',
+        'isi',
+        'jenis', // visi, misi, sejarah
+    ];
 }

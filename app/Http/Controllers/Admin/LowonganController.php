@@ -30,7 +30,7 @@ class LowonganController extends Controller
 
         Lowongan::create($request->all());
 
-        return redirect()->route('lowongan.index')->with('success', 'Lowongan berhasil ditambahkan.');
+        return redirect()->route('admin.lowongan.index')->with('success', 'Lowongan berhasil ditambahkan.');
     }
 
     public function edit(Lowongan $lowongan)
@@ -49,7 +49,7 @@ class LowonganController extends Controller
 
         $lowongan->update($request->all());
 
-        return redirect()->route('lowongan.index')->with('success', 'Lowongan berhasil diperbarui.');
+        return redirect()->route('admin.lowongan.index')->with('success', 'Lowongan berhasil diperbarui.');
     }
 
     public function destroy(Lowongan $lowongan)

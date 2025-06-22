@@ -52,7 +52,7 @@ class ProdukController extends Controller
             'nama_produk' => 'required',
             'deskripsi' => 'nullable',
             'gambar' => 'nullable|image',
-            'kategori_id' => 'required|exists:kategori_produk,id',
+            'kategori_id' => 'required|exists:kategori_produks,id',
             'harga' => 'nullable|numeric',
         ]);
 

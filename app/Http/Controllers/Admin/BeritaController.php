@@ -84,18 +84,14 @@ class BeritaController extends Controller
 
         $berita->update($validated);
 
-        return redirect()->route('berita.index')->with('success', 'Berita berhasil diperbarui');
+        return redirect()->route('admin.berita.index')->with('success', 'Berita berhasil diperbarui');
     }
 
-    public function destroy($id)
+    public function destroy(Berita $berita)
     {
-        $berita = Berita::findOrFail($id);
 
          // Menghapus berita dari database
         $berita->delete();
-
-        // Menambahkan notifikasi
-        Session::flash('success', 'Berita berhasil dihapus!');
 
         return redirect()->route('admin.berita.index')->with('success', 'Berita berhasil dihapus');
     }
