@@ -7,8 +7,10 @@ use App\Models\Lamaran;
 use App\Models\Lowongan;
 use App\Models\Produk;
 use App\Models\ProfilPerusahaan;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class AuthController extends Controller
 {
@@ -32,7 +34,6 @@ class AuthController extends Controller
             'email' => $request->input('email'),
             'password' => $request->input('password')
         ], $request->remember)) {
-            // Redirect ke halaman home setelah login berhasil
             return redirect()->route('dashboard');
         }
 
@@ -68,5 +69,38 @@ class AuthController extends Controller
     {
         Auth::logout();
         return redirect()->route('login');
+    }
+
+        public function register(Request $request)
+    {
+        return view('auth.register');
+    }
+
+    public function registerStore(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:8|confirmed', // pastikan ada password_confirmation
+        ]);
+
+        $user = User::create([
+            'name' => $request->input('name'),
+            'email' => $request->input('email'),
+            'password' => bcrypt($request->input('password')), // Enkripsi password
+        ]);
+
+          // Tambahkan role_id = 3 ke tabel role_user
+        DB::table('role_user')->insert([
+            'role_id' => 1, // asumsi 3 adalah id untuk role 'Customer' atau setara
+            'user_id' => $user->id,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        // Login otomatis setelah register
+        Auth::login($user);
+
+        return redirect()->route('dashboard');
     }
 }

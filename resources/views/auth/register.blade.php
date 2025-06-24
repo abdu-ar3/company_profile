@@ -1,60 +1,119 @@
-<x-guest-layout>
-    <x-authentication-card>
-        <x-slot name="logo">
-            <x-authentication-card-logo />
-        </x-slot>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Tivo is a HTML landing page template built with Bootstrap to help you crate engaging presentations for SaaS apps and convert visitors into users.">
+    <meta name="author" content="Inovatik">
 
-        <x-validation-errors class="mb-4" />
+    <!-- OG Meta Tags to improve the way the post looks when you share the page on LinkedIn, Facebook, Google+ -->
+	<meta property="og:site_name" content="" /> <!-- website name -->
+	<meta property="og:site" content="" /> <!-- website link -->
+	<meta property="og:title" content=""/> <!-- title shown in the actual shared post -->
+	<meta property="og:description" content="" /> <!-- description shown in the actual shared post -->
+	<meta property="og:image" content="" /> <!-- image link, make sure it's jpg -->
+	<meta property="og:url" content="" /> <!-- where do you want your post to link to -->
+	<meta property="og:type" content="article" />
 
-        <form method="POST" action="{{ route('register') }}">
-            @csrf
+    <!-- Website Title -->
+    <title>Sign Up - Tivo - SaaS App HTML Landing Page Template</title>
+    
+    <!-- Styles -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700&display=swap&subset=latin-ext" rel="stylesheet">
+    <link href="{{ asset('assets/frontend/css/bootstrap.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/frontend/css/fontawesome-all.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/frontend/css/swiper.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/frontend/css/magnific-popup.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/frontend/css/styles.css') }}" rel="stylesheet">
 
-            <div>
-                <x-label for="name" value="{{ __('Name') }}" />
-                <x-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
-            </div>
+    <!-- Favicon -->
+    <link rel="icon" href="{{ asset('assets/frontend/images/favicon.png') }}">
 
-            <div class="mt-4">
-                <x-label for="email" value="{{ __('Email') }}" />
-                <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autocomplete="username" />
-            </div>
+	
+	<!-- Favicon  -->
+    <link rel="icon" href="images/favicon.png">
+</head>
+<body data-spy="scroll" data-target=".fixed-top">
+    
+    <!-- Preloader -->
+	<div class="spinner-wrapper">
+        <div class="spinner">
+            <div class="bounce1"></div>
+            <div class="bounce2"></div>
+            <div class="bounce3"></div>
+        </div>
+    </div>
+    <!-- end of preloader -->
+    
 
-            <div class="mt-4">
-                <x-label for="password" value="{{ __('Password') }}" />
-                <x-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="new-password" />
-            </div>
 
-            <div class="mt-4">
-                <x-label for="password_confirmation" value="{{ __('Confirm Password') }}" />
-                <x-input id="password_confirmation" class="block mt-1 w-full" type="password" name="password_confirmation" required autocomplete="new-password" />
-            </div>
-
-            @if (Laravel\Jetstream\Jetstream::hasTermsAndPrivacyPolicyFeature())
-                <div class="mt-4">
-                    <x-label for="terms">
-                        <div class="flex items-center">
-                            <x-checkbox name="terms" id="terms" required />
-
-                            <div class="ml-2">
-                                {!! __('I agree to the :terms_of_service and :privacy_policy', [
-                                        'terms_of_service' => '<a target="_blank" href="'.route('terms.show').'" class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">'.__('Terms of Service').'</a>',
-                                        'privacy_policy' => '<a target="_blank" href="'.route('policy.show').'" class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">'.__('Privacy Policy').'</a>',
-                                ]) !!}
-                            </div>
-                        </div>
-                    </x-label>
+    <!-- Header -->
+    <header id="header" class="ex-2-header">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1>Sign Up</h1>
+                   <p>Fill out the form below to sign up for Tivo. Already signed up? Then just <a class="white" href="log-in.html">Log In</a></p> 
+                    <!-- Sign Up Form -->
+                    <div class="form-container">
+                    <form  method="POST" action="{{ route('registerStore') }}">
+                        @csrf
+                <div class="form-group">
+                    <input type="text" name="name" class="form-control-input @error('name') is-invalid @enderror" id="sname" value="{{ old('name') }}" required>
+                    <label class="label-control" for="sname">Name</label>
+                    @error('name')
+                        <div class="text-danger small">{{ $message }}</div>
+                    @enderror
                 </div>
-            @endif
 
-            <div class="flex items-center justify-end mt-4">
-                <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('login') }}">
-                    {{ __('Already registered?') }}
-                </a>
+                <div class="form-group">
+                    <input type="email" name="email" class="form-control-input @error('email') is-invalid @enderror" id="semail" value="{{ old('email') }}" required>
+                    <label class="label-control" for="semail">Email</label>
+                    @error('email')
+                        <div class="text-danger small">{{ $message }}</div>
+                    @enderror
+                </div>
 
-                <x-button class="ml-4">
-                    {{ __('Register') }}
-                </x-button>
-            </div>
-        </form>
-    </x-authentication-card>
-</x-guest-layout>
+                <div class="form-group">
+                    <input type="password" name="password" class="form-control-input @error('password') is-invalid @enderror" id="spassword" required>
+                    <label class="label-control" for="spassword">Password</label>
+                    @error('password')
+                        <div class="text-danger small">{{ $message }}</div>
+                    @enderror
+                </div>
+
+                    <div class="form-group">
+                        <input type="password" name="password_confirmation" class="form-control-input" id="spassword-confirmation" required>
+                        <label class="label-control" for="spassword-confirmation">Confirm Password</label>
+                    </div>
+
+
+                    <div class="form-group">
+                        <button type="submit" class="form-control-submit-button">SIGN UP</button>
+                    </div>
+
+                </form>
+                    </div> <!-- end of form container -->
+                    <!-- end of sign up form -->
+
+                </div> <!-- end of col -->
+            </div> <!-- end of row -->
+        </div> <!-- end of container -->
+    </header> <!-- end of ex-header -->
+    <!-- end of header -->
+
+
+    <!-- Scripts -->
+    <script src="{{ asset('assets/frontend/js/jquery.min.js') }}"></script>
+    <script src="{{ asset('assets/frontend/js/popper.min.js') }}"></script>
+    <script src="{{ asset('assets/frontend/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('assets/frontend/js/jquery.easing.min.js') }}"></script>
+    <script src="{{ asset('assets/frontend/js/swiper.min.js') }}"></script>
+    <script src="{{ asset('assets/frontend/js/jquery.magnific-popup.js') }}"></script>
+    <script src="{{ asset('assets/frontend/js/validator.min.js') }}"></script>
+    <script src="{{ asset('assets/frontend/js/scripts.js') }}"></script>
+
+</body>
+</html>
