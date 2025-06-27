@@ -3,6 +3,7 @@
 @section('content')
 
     <!-- Video -->
+<section id="tentang-kami" class="mt-4">
     <div id="video" class="basic-2">
     <div class="container">
         <div class="row">
@@ -82,6 +83,7 @@
     <!-- end of pricing -->
 
     <!-- Slider for Lowongan Kerja -->
+    <section id="karier" class="mt-4">
     <div class="slider-2">
         <div class="container">
             <div class="row">
@@ -140,6 +142,7 @@
             </div> <!-- end of row -->
         </div> <!-- end of container -->
     </div> <!-- end of slider-2 -->
+</section>
 
     <!-- Section: Berita -->
    <section id="berita" class="mt-4">
@@ -185,6 +188,7 @@
 
 
 
+<section id="kontak" class="mt-4">
    <div class="form">
     <div class="container">
         <div class="row">
@@ -232,7 +236,7 @@
 
     </div> <!-- end of container -->
 </div>
-
+</section>
 
 
     <!-- Modal untuk Form Lamaran -->

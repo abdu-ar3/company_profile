@@ -18,7 +18,7 @@
     <meta property="og:type" content="article" />
 
     <!-- Website Title -->
-    <title>Company Profile - PT Lestari Elektrik</title>
+    <title>Company Profile - CV Lestari Elektrik</title>
     
     <!-- Styles -->
     <link href="{{ asset('assets/user/css/bootstrap.css') }}" rel="stylesheet">
@@ -27,6 +27,91 @@
     <link href="{{ asset('assets/user/css/magnific-popup.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/user/css/styles.css') }}" rel="stylesheet">
     
+    <style>
+       .navbar-custom {
+        background-color: #FFFCFB    !important;
+    }
+
+
+    .navbar-custom .navbar-nav .nav-link {
+        color: #fff !important;
+    }
+
+    .navbar-custom .nav-link:hover,
+    .navbar-custom .nav-link.active {
+        color: #dcdcdc !important;
+    }
+
+    .navbar-custom {
+    background-color: #ffffff !important; /* putih bersih */
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05); /* biar ada depth */
+}
+
+.navbar-custom .navbar-nav .nav-link {
+    color: #1e56a0 !important; /* biru soft */
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.navbar-custom .nav-link:hover,
+.navbar-custom .nav-link.active {
+    color: #3273dc !important; /* biru terang saat hover/active */
+}
+
+.navbar-custom .navbar-nav .nav-link {
+    font-size: 1.05rem; /* default ~14px → naik jadi ±16.8px */
+    font-weight: 500;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    color: #1e56a0 !important;
+}
+
+.navbar-custom .nav-link:hover,
+.navbar-custom .nav-link.active {
+    color: #3273dc !important;
+}
+
+/* Style dasar link */
+.navbar-custom .navbar-nav .nav-link {
+    position: relative;
+    font-size: 1.05rem;
+    font-weight: 500;
+    color: #1e56a0 !important;
+    transition: color 0.3s ease;
+}
+
+
+.navbar-custom .nav-link {
+    color: #1e56a0 !important;
+    padding: 8px 16px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.navbar-custom .nav-link.active,
+.navbar-custom .nav-link:hover {
+    background-color: #e7f0fd; /* biru muda kalem */
+    color: #0d3b66 !important;
+    font-weight: 600;
+}
+
+
+/* Garis bawah animasi */
+.navbar-custom .nav-link.active::after,
+.navbar-custom .nav-link:hover::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    height: 2px;
+    width: 100%;
+    background-color: #3273dc;
+    transition: width 0.3s ease;
+}
+
+
+
+    </style>
     <!-- Favicon -->
     <link rel="icon" href="{{ asset('assets/img/custom/profile.png') }}">
 </head>
@@ -73,7 +158,7 @@
                 <div class="row">
                     <div class="col-lg-6 col-xl-5">
                         <div class="text-container">
-                            <h1>Selamat Datang di PT Lestari Elektrik</h1>
+                            <h1>Selamat Datang di CV Lestari Elektrik</h1>
                             <p class="p-large">Kami adalah perusahaan yang menyediakan produk elektronik dan peralatan industri berkualitas tinggi.</p>
                             <a class="btn-solid-lg page-scroll" href="#produk">Lihat Produk</a>
                         </div>
@@ -81,7 +166,7 @@
                     <div class="col-lg-6 col-xl-6 ml-2">
                         <div class="image-container">
                             <div class="img-wrapper">
-                                <img class="img-fluid" src="{{ asset('assets/img/custom/emergency.png') }}" alt="alternative" width="500PX">
+                                <img class="img-fluid" src="{{ asset('assets/img/custom/remove.png') }}" alt="alternative" width="500PX">
                             </div>
                         </div>
                     </div>

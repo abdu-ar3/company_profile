@@ -22,6 +22,6 @@ User Admin
 ```bash
 git clone <repo-url>
 cd nama-folder
-composer install
-npm install && npm run dev
+composer update
+php artisan serve
 
