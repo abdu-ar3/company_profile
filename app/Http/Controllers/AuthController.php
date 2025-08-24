@@ -48,8 +48,13 @@ class AuthController extends Controller
         $berita = Berita::latest()->take(6)->get();
 
         $profils = ProfilPerusahaan::all()->groupBy('jenis');
+        $sections = [
+            'sejarah' => ['label' => 'Sejarah', 'icon' => 'hourglass-split'],
+            'visi'    => ['label' => 'Visi',    'icon' => 'eye'],
+            'misi'    => ['label' => 'Misi',    'icon' => 'list-check'],
+        ];
 
-        return view('home', compact('produk', 'lowongan', 'berita', 'profils'));
+        return view('home', compact('produk', 'lowongan', 'berita', 'profils', 'sections'));
     }
     
     public function dashboard()

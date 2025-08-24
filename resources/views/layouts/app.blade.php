@@ -18,7 +18,7 @@
     <meta property="og:type" content="article" />
 
     <!-- Website Title -->
-    <title>Company Profile - CV Lestari Elektrik</title>
+    <title>Company Profile - PT Lestari Elektrik</title>
     
     <!-- Styles -->
     <link href="{{ asset('assets/user/css/bootstrap.css') }}" rel="stylesheet">
@@ -158,7 +158,7 @@
                 <div class="row">
                     <div class="col-lg-6 col-xl-5">
                         <div class="text-container">
-                            <h1>Selamat Datang di CV Lestari Elektrik</h1>
+                            <h1>Selamat Datang di PT Lestari Elektrik</h1>
                             <p class="p-large">Kami adalah perusahaan yang menyediakan produk elektronik dan peralatan industri berkualitas tinggi.</p>
                             <a class="btn-solid-lg page-scroll" href="#produk">Lihat Produk</a>
                         </div>
@@ -189,7 +189,7 @@
             <div class="row">
                 <div class="col-md-4">
                     <div class="footer-col first">
-                        <h4>About CV Lestari Electric</h4>
+                        <h4>About PT Lestari Electric</h4>
                         <p class="p-small">Electric Market</p>
                     </div>
                 </div>

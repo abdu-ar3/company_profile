@@ -1,41 +1,137 @@
 @extends('layouts.app')
 
+
+@php
+use Illuminate\Support\Str;
+
+$sections = [
+    'sejarah' => ['label' => 'Sejarah', 'icon' => 'hourglass-split'],
+    'visi'    => ['label' => 'Visi',    'icon' => 'eye'],
+    'misi'    => ['label' => 'Misi',    'icon' => 'list-check'],
+];
+@endphp
+
 @section('content')
 
-    <!-- Video -->
-<section id="tentang-kami" class="mt-4">
-    <div id="video" class="basic-2">
+ <section id="tentang-kami" class="mt-4">
+  <div id="video" class="basic-2">
     <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
+      <div class="row">
+        <div class="col-lg-12">
 
-                <!-- Video Preview -->
-                <div class="image-container">
-                    <div class="video-wrapper">
-                        <a class="popup-youtube" href="https://www.youtube.com/watch?v=fLCjQJCekTs" data-effect="fadeIn">
-                            <img class="img-fluid" src="{{ asset('assets/img/custom/emergency.png') }}" alt="alternative" width="200PX">
-                            <span class="video-play-button"><span></span></span>
-                        </a>
+          {{-- Video Preview --}}
+          <div class="image-container">
+            <div class="video-wrapper">
+              <a class="popup-youtube" href="https://www.youtube.com/watch?v=fLCjQJCekTs" data-effect="fadeIn">
+                <img class="img-fluid" src="{{ asset('assets/img/custom/emergency.png') }}" alt="alternative" width="200">
+                <span class="video-play-button"><span></span></span>
+              </a>
+            </div>
+          </div>
+
+          <h2 class="h2-heading text-center mb-4">Tentang Kami</h2>
+
+          <div class="row row-cols-1 row-cols-md-3 g-4">
+            @foreach($sections as $key => $meta)
+              @php
+                $item = $profils[$key][0] ?? null;
+              @endphp
+
+              @if($item)
+                @php
+                  $raw = $item->isi ?? '';
+                  $text = strip_tags($raw);
+                  $excerpt = Str::words($text, 50);
+                  $needsToggle = str_word_count($text) > 50;
+                @endphp
+
+                <div class="col">
+                  <div class="card h-100 border-0 shadow-sm card-lift">
+                    <div class="card-body p-4 d-flex flex-column">
+                      <div class="d-flex align-items-center gap-3 mb-3">
+                        <div class="icon-blob">
+                          <i class="bi bi-{{ $meta['icon'] }}"></i>
+                        </div>
+                        <span class="badge bg-light text-dark fw-semibold px-3 py-2 rounded-pill">
+                          {{ $meta['label'] }}
+                        </span>
+                      </div>
+
+                      <div class="flex-grow-1">
+                        <div class="content-excerpt">
+                          {!! nl2br(e($excerpt)) !!}
+                          @if($needsToggle) … @endif
+                        </div>
+
+                        @if($needsToggle)
+                          <div class="content-full d-none">
+                            {!! nl2br(e($raw)) !!}
+                          </div>
+                        @endif
+                      </div>
+
+                      @if($needsToggle)
+                        <div class="mt-3">
+                          <button type="button"
+                                  class="btn btn-outline-primary btn-sm btn-toggle-content"
+                                  aria-expanded="false">
+                            Detail
+                          </button>
+                        </div>
+                      @endif
                     </div>
+                  </div>
                 </div>
+              @endif
+            @endforeach
+          </div>
 
-                <div class="card-image mb-4">
-                    <img class="img-fluid" src="{{ asset('assets/img/custom/profile.png') }}" alt="alternative">
-                </div>
+          {{-- Styling kecil untuk ikon & hover --}}
+          <style>
+            .card-lift { transition: transform .2s ease, box-shadow .2s ease; }
+            .card-lift:hover { transform: translateY(-4px); box-shadow: 0 .75rem 1.5rem rgba(0,0,0,.08); }
+            .icon-blob{
+              width: 48px; height: 48px; border-radius: 50%;
+              display: inline-flex; align-items: center; justify-content: center;
+              background: linear-gradient(135deg, #e9f2ff 0%, #f5f9ff 45%, #eef7ff 100%);
+              box-shadow: 0 6px 14px rgba(33, 150, 243, .12), inset 0 0 0 1px rgba(0,0,0,.04);
+              flex: 0 0 48px; font-size: 1.1rem; color: #0d6efd;
+            }
+          </style>
 
-                <h2 class="h2-heading">Tentang Kami</h2>
+          {{-- Toggle script --}}
+          <script>
+            document.addEventListener('DOMContentLoaded', function () {
+              document.querySelectorAll('.btn-toggle-content').forEach(function(btn){
+                btn.addEventListener('click', function(){
+                  const card = btn.closest('.card-body');
+                  const excerpt = card.querySelector('.content-excerpt');
+                  const full = card.querySelector('.content-full');
+                  const expanded = btn.getAttribute('aria-expanded') === 'true';
 
-                @if($profils['sejarah'][0] ?? false)
-                    <p><strong>Sejarah:</strong><br>{!! nl2br(e($profils['sejarah'][0]->isi)) !!}</p>
-                @endif
+                  if (!expanded) {
+                    if (full) full.classList.remove('d-none');
+                    if (excerpt) excerpt.classList.add('d-none');
+                    btn.textContent = 'Tutup';
+                    btn.setAttribute('aria-expanded', 'true');
+                  } else {
+                    if (full) full.classList.add('d-none');
+                    if (excerpt) excerpt.classList.remove('d-none');
+                    btn.textContent = 'Detail';
+                    btn.setAttribute('aria-expanded', 'false');
+                  }
+                });
+              });
+            });
+          </script>
 
-                @if($profils['visi'][0] ?? false)
-                    <p><strong>Visi:</strong><br>{!! nl2br(e($profils['visi'][0]->isi)) !!}</p>
-                @endif
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-                @if($profils['misi'][0] ?? false)
-                    <p><strong>Misi:</strong><br>{!! nl2br(e($profils['misi'][0]->isi)) !!}</p>
-                @endif
+
 
             </div>
         </div>
@@ -80,7 +176,6 @@
 </section>
 
 
-    <!-- end of pricing -->
 
     <!-- Slider for Lowongan Kerja -->
     <section id="karier" class="mt-4">
@@ -203,7 +298,7 @@
                         </div>
                     @endif
                     <!-- Kontak Form -->
-                    <form id="kontakForm" method="POST" action="{{ route('admin.kontak.store') }}" data-toggle="validator" data-focus="false">
+                    <form id="kontakForm" method="POST" action="{{ route('kontak.store') }}" data-toggle="validator" data-focus="false">
                         @csrf
                         <div class="form-group">
                             <label for="nama">Nama</label>

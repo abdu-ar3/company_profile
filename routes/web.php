@@ -39,8 +39,8 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
     Route::resource('lowongan', \App\Http\Controllers\Admin\LowonganController::class);
     Route::resource('lamaran', \App\Http\Controllers\Admin\LamaranController::class);
     Route::resource('profil', \App\Http\Controllers\Admin\ProfilController::class);
-    Route::resource('kontak', \App\Http\Controllers\Admin\KontakController::class);
 });
+Route::resource('kontak', \App\Http\Controllers\Admin\KontakController::class);
 
 Route::get('lamaran/create', [\App\Http\Controllers\User\LamaranController::class, 'create'])->name('lamaran.create');
 Route::post('lamaran', [\App\Http\Controllers\User\LamaranController::class, 'store'])->name('lamaran.store');
