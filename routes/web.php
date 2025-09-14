@@ -27,6 +27,10 @@ Route::get('/admin/dashboard', [AuthController::class, 'dashboard'])->name('dash
 
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
+Route::get('/test-navbar', function () {
+    return view('test-navbar');
+});
+
 
 Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
 

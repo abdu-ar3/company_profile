@@ -1,158 +1,219 @@
-<!DOCTYPE html>
-<html lang="en">
+{{-- resources/views/layouts/app.blade.php --}}
+<!doctype html>
+<html lang="id">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    
-    <!-- SEO Meta Tags -->
-    <meta name="description" content="Tivo is a HTML landing page template built with Bootstrap to help you crate engaging presentations for SaaS apps and convert visitors into users.">
-    <meta name="author" content="Inovatik">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- OG Meta Tags to improve the way the post looks when you share the page on LinkedIn, Facebook, Google+ -->
-    <meta property="og:site_name" content="" /> <!-- website name -->
-    <meta property="og:site" content="" /> <!-- website link -->
-    <meta property="og:title" content=""/> <!-- title shown in the actual shared post -->
-    <meta property="og:description" content="" /> <!-- description shown in the actual shared post -->
-    <meta property="og:image" content="" /> <!-- image link, make sure it's jpg -->
-    <meta property="og:url" content="" /> <!-- where do you want your post to link to -->
-    <meta property="og:type" content="article" />
+  {{-- SEO/OG meta opsional --}}
+  <meta name="description" content="@yield('meta_description','Company Profile PT Lestari Elektrik')">
+  <meta name="author" content="PT Lestari Elektrik">
+  <meta property="og:title" content="@yield('og_title','PT Lestari Elektrik')">
+  <meta property="og:description" content="@yield('og_description','Perusahaan elektronik & peralatan industri berkualitas tinggi')">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="{{ url()->current() }}">
+  <meta property="og:image" content="{{ asset('assets/img/custom/profile.png') }}">
 
-    <!-- Website Title -->
-    <title>Company Profile - PT Lestari Elektrik</title>
-    
-    <!-- Styles -->
-    <link href="{{ asset('assets/user/css/bootstrap.css') }}" rel="stylesheet">
-    <link href="{{ asset('assets/user/css/fontawesome-all.css') }}" rel="stylesheet">
-    <link href="{{ asset('assets/user/css/swiper.css') }}" rel="stylesheet">
-    <link href="{{ asset('assets/user/css/magnific-popup.css') }}" rel="stylesheet">
-    <link href="{{ asset('assets/user/css/styles.css') }}" rel="stylesheet">
-    
-    <style>
-       .navbar-custom {
-        background-color: #FFFCFB    !important;
+  <meta name="csrf-token" content="{{ csrf_token() }}">
+
+  {{-- Bootstrap 4.5.2 & Font Awesome (CDN) --}}
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"/>
+
+  {{-- Styles kustom kamu --}}
+  <link href="{{ asset('assets/user/css/swiper.css') }}" rel="stylesheet">
+  <link href="{{ asset('assets/user/css/magnific-popup.css') }}" rel="stylesheet">
+  <link href="{{ asset('assets/user/css/styles.css') }}" rel="stylesheet">
+
+  {{-- Favicon --}}
+  <link rel="icon" href="{{ asset('assets/img/custom/profile.png') }}">
+
+  <style>
+    /* Ruang untuk fixed-top supaya konten tidak ketutup */
+    body { padding-top: 72px; }
+
+    /* Navbar look */
+    .navbar-custom {
+      background-color: #ffffff !important;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+      z-index: 1040;
     }
 
-
-    .navbar-custom .navbar-nav .nav-link {
-        color: #fff !important;
+    .navbar-custom .nav-link {
+      position: relative;
+      font-size: 1.05rem;
+      font-weight: 500;
+      color: #1e56a0 !important;
+      padding: 8px 16px;
+      border-radius: 8px;
+      transition: all .3s ease;
     }
-
     .navbar-custom .nav-link:hover,
     .navbar-custom .nav-link.active {
-        color: #dcdcdc !important;
+      background-color: #e7f0fd;
+      color: #0d3b66 !important;
+      font-weight: 600;
+    }
+    .navbar-custom .nav-link:hover::after,
+    .navbar-custom .nav-link.active::after {
+      content: '';
+      position: absolute; left: 0; bottom: -6px;
+      height: 2px; width: 100%; background: #3273dc;
     }
 
-    .navbar-custom {
-    background-color: #ffffff !important; /* putih bersih */
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05); /* biar ada depth */
-}
+    /* ===== Toggler (hamburger) kontras & swap ===== */
+    .navbar-light .navbar-toggler{
+      border: 1px solid #3273dc;
+      border-radius: 10px;
+      padding: .35rem .6rem;
+      background: #eef4ff; /* beda dari background putih */
+      box-shadow: 0 0 0 2px rgba(50,115,220,.10);
+      outline: none !important;
+    }
+    .navbar-light .navbar-toggler:hover{
+      background: #e0ecff;
+      box-shadow: 0 0 0 3px rgba(50,115,220,.15);
+    }
+    .navbar-toggler i{
+      color: #3273dc;
+      font-size: 1.25rem;
+      line-height: 1;
+      vertical-align: middle;
+    }
+    .navbar-toggler .fa-times{ display:none; }
+    .navbar-toggler[aria-expanded="true"] .fa-bars{ display:none; }
+    .navbar-toggler[aria-expanded="true"] .fa-times{ display:inline-block; }
 
-.navbar-custom .navbar-nav .nav-link {
-    color: #1e56a0 !important; /* biru soft */
-    font-weight: 500;
-    transition: color 0.3s ease;
-}
+    /* Panel collapse (mobile) + tombol Close di dalam panel */
+    @media (max-width: 991.98px){
+      .navbar-collapse{
+        background:#fff;
+        border-radius:12px;
+        box-shadow:0 12px 24px rgba(0,0,0,.08);
+        padding: .75rem 0 .5rem;
+        margin-top:.5rem;
+        position: relative;
+      }
+      .navbar-nav .nav-link{ padding:10px 1rem; }
+      .mobile-close-wrap{
+        display: flex;
+        justify-content: flex-end;
+        padding: .25rem .5rem .25rem 0;
+      }
+      .btn-close-menu{
+        border: 1px solid #3273dc;
+        background: #eef4ff;
+        color:#3273dc;
+        border-radius: 10px;
+        padding: .35rem .55rem;
+        line-height:1;
+      }
+      .btn-close-menu i{ font-size:1rem; }
+      .btn-close-menu:hover{
+        background:#e0ecff;
+        color:#0d3b66;
+        text-decoration:none;
+      }
+    }
 
-.navbar-custom .nav-link:hover,
-.navbar-custom .nav-link.active {
-    color: #3273dc !important; /* biru terang saat hover/active */
-}
+    /* ===== Footer w/ blue wave ===== */
+    .footer-wave {
+      display: block;
+      width: 100%;
+      height: 80px;
+      line-height: 0;
+      overflow: hidden;
+      margin-top: 3rem; /* jarak dari konten atas */
+    }
+    .footer-wave svg {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+    .site-footer {
+      background: linear-gradient(180deg, #f6faff 0%, #e7f0fd 100%);
+      color: #0d3b66;
+    }
+    .site-footer h5 { color: #0d3b66; }
+    .site-footer p,
+    .site-footer li,
+    .site-footer .text-muted { color: #2d4166 !important; opacity: .9; }
+    .site-footer .footer-hr { border-top: 1px solid rgba(13,59,102,.12); }
+  </style>
 
-.navbar-custom .navbar-nav .nav-link {
-    font-size: 1.05rem; /* default ~14px → naik jadi ±16.8px */
-    font-weight: 500;
-    padding-left: 1rem;
-    padding-right: 1rem;
-    color: #1e56a0 !important;
-}
-
-.navbar-custom .nav-link:hover,
-.navbar-custom .nav-link.active {
-    color: #3273dc !important;
-}
-
-/* Style dasar link */
-.navbar-custom .navbar-nav .nav-link {
-    position: relative;
-    font-size: 1.05rem;
-    font-weight: 500;
-    color: #1e56a0 !important;
-    transition: color 0.3s ease;
-}
-
-
-.navbar-custom .nav-link {
-    color: #1e56a0 !important;
-    padding: 8px 16px;
-    border-radius: 8px;
-    transition: all 0.3s ease;
-}
-
-.navbar-custom .nav-link.active,
-.navbar-custom .nav-link:hover {
-    background-color: #e7f0fd; /* biru muda kalem */
-    color: #0d3b66 !important;
-    font-weight: 600;
-}
-
-
-/* Garis bawah animasi */
-.navbar-custom .nav-link.active::after,
-.navbar-custom .nav-link:hover::after {
-    content: '';
-    position: absolute;
-    left: 0;
-    bottom: -6px;
-    height: 2px;
-    width: 100%;
-    background-color: #3273dc;
-    transition: width 0.3s ease;
-}
-
-
-
-    </style>
-    <!-- Favicon -->
-    <link rel="icon" href="{{ asset('assets/img/custom/profile.png') }}">
+  <title>@yield('title','PT Lestari Elektrik')</title>
+  @stack('styles')
 </head>
-<body data-spy="scroll" data-target=".fixed-top">
-    
-    <!-- Preloader -->
-    <div class="spinner-wrapper">
-        <div class="spinner">
-            <div class="bounce1"></div>
-            <div class="bounce2"></div>
-            <div class="bounce3"></div>
-        </div>
-    </div>
-    <!-- end of preloader -->
+<body data-spy="scroll" data-target="#mainNavbar" data-offset="90">
 
-    <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
+
+  {{-- ================= NAVBAR ================= --}}
+<nav id="mainNavbar" class="navbar navbar-expand-lg navbar-light navbar-custom fixed-top">
+
     <div class="container">
-            <img class="img-fluid" src="{{ asset('assets/img/custom/profile.png') }}" alt="logo" width="120px">
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-awesome fas fa-bars"></span>
-            <span class="navbar-toggler-awesome fas fa-times"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item"><a class="nav-link page-scroll" href="/">Home</a></li>
-                <li class="nav-item"><a class="nav-link page-scroll" href="#tentang-kami">Tentang Kami</a></li>
-                <li class="nav-item"><a class="nav-link page-scroll" href="#produk">Produk & Layanan</a></li>
-                <li class="nav-item"><a class="nav-link page-scroll" href="#karier">Karier</a></li>
-                <li class="nav-item"><a class="nav-link page-scroll" href="#berita">Berita</a></li>
-                <li class="nav-item"><a class="nav-link page-scroll" href="#kontak">Kontak</a></li>
-                <li class="nav-item"><a class="nav-link page-scroll" href="{{ route('login') }}">Login</a></li>
-            </ul>
-            <span class="nav-item">
-            </span>
-        </div>
-    </div>
-</nav>
+      <a class="navbar-brand d-flex align-items-center" href="{{ url('/') }}">
+        <img class="img-fluid" src="{{ asset('assets/img/custom/profile.png') }}" alt="logo" width="120">
+      </a>
 
-    <!-- Header -->
-    <header id="header" class="header">
+      {{-- Tombol hamburger (kontras) --}}
+      <button class="navbar-toggler" type="button"
+              data-toggle="collapse" data-target="#navbarNav"
+              aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="fas fa-bars"></i>
+        <i class="fas fa-times"></i>
+      </button>
+
+      {{-- Menu --}}
+      <div class="collapse navbar-collapse" id="navbarNav">
+        {{-- Tombol Close (X) di dalam panel, hanya muncul di mobile --}}
+         <div class="mobile-close-wrap d-lg-none">
+        <button type="button" class="btn btn-sm btn-close-menu" aria-label="Close menu">
+            <i class="fas fa-times"></i>
+        </button>
+        </div>
+
+
+ <ul class="navbar-nav ml-auto align-items-lg-center">
+  <li class="nav-item">
+    <a class="nav-link {{ request()->is('/') ? 'active' : '' }}"
+       href="{{ request()->is('/') ? '#home' : url('/#home') }}">Home</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link page-scroll"
+       href="{{ request()->is('/') ? '#tentang-kami' : url('/#tentang-kami') }}">Tentang Kami</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link page-scroll"
+       href="{{ request()->is('/') ? '#produk' : url('/#produk') }}">Produk & Layanan</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link page-scroll"
+       href="{{ request()->is('/') ? '#karier' : url('/#karier') }}">Karier</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link page-scroll"
+       href="{{ request()->is('/') ? '#berita' : url('/#berita') }}">Berita</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link page-scroll"
+       href="{{ request()->is('/') ? '#kontak' : url('/#kontak') }}">Kontak</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link {{ request()->routeIs('login') ? 'active' : '' }}"
+       href="{{ route('login') }}">Login</a>
+  </li>
+</ul>
+
+
+
+      </div>
+    </div>
+  </nav>
+  @hasSection('header')
+    @yield('header')
+  @endif
+
+      <header id="header" class="header">
         <div class="header-content">
             <div class="container">
                 <div class="row">
@@ -175,68 +236,154 @@
         </div>
     </header>
 
-    <!-- Content -->
-    <main>
-        @yield('content')
-    </main>
+  {{-- ================== MAIN CONTENT ================== --}}
+  <main role="main">
+    @yield('content')
+  </main>
 
+  @hasSection('footer')
+  @yield('footer')
+@else
+  {{-- Wave di atas footer --}}
+  <div class="footer-wave" aria-hidden="true">
+    <svg viewBox="0 0 1440 120" preserveAspectRatio="none">
+      <path d="M0,64 C240,96 480,0 720,24 C960,48 1200,128 1440,96 L1440,0 L0,0 Z" fill="#e7f0fd"></path>
+    </svg>
+  </div>
 
-    <!-- Footer -->
-    <svg class="footer-frame" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" viewBox="0 0 1920 79"><defs><style>.cls-2{fill:#5f4def;}</style></defs><title>footer-frame</title><path class="cls-2" d="M0,72.427C143,12.138,255.5,4.577,328.644,7.943c147.721,6.8,183.881,60.242,320.83,53.737,143-6.793,167.826-68.128,293-60.9,109.095,6.3,115.68,54.364,225.251,57.319,113.58,3.064,138.8-47.711,251.189-41.8,104.012,5.474,109.713,50.4,197.369,46.572,89.549-3.91,124.375-52.563,227.622-50.155A338.646,338.646,0,0,1,1920,23.467V79.75H0V72.427Z" transform="translate(0 -0.188)"/></svg>
-
-    <div class="footer">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="footer-col first">
-                        <h4>About PT Lestari Electric</h4>
-                        <p class="p-small">Electric Market</p>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="footer-col middle">
-                       
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="footer-col last">
-                        <h4>Address</h4>
-                        <ul class="list-unstyled li-space-lg p-small">
-                            <li class="media">
-                                <div class="media-body">City, Golden Boulevard, Blk. F1 Jl. Komp. BSD No.9, Lengkong Karya, Tangerang, Kota Tangerang Selatan, Banten 15310</div>
-                            </li>
-                        </ul>
-                    </div> 
-                </div>
-            </div>
+  <footer class="site-footer pt-4 pb-2">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4 mb-3">
+          <h5>About PT Lestari Elektrik</h5>
+          <p class="mb-0">Electric Market</p>
         </div>
-    </div>
-
-    <!-- Copyright -->
-    <div class="copyright">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <p class="p-small">Copyright © 2025 <a href="https://inovatik.com"></a><br>
-                    </p>
-                </div>
-            </div>
+        <div class="col-md-4 mb-3">
+          {{-- Kosong / quick links nanti --}}
         </div>
+        <div class="col-md-4 mb-3">
+          <h5>Address</h5>
+          <p class="mb-0">
+            City, Golden Boulevard, Blk. F1 Jl. Komp. BSD No.9, Lengkong Karya, Tangerang,
+            Kota Tangerang Selatan, Banten 15310
+          </p>
+        </div>
+      </div>
+      <hr class="footer-hr">
+      <div class="text-center small text-muted">
+        Copyright © {{ now()->year }} PT Lestari Elektrik
+      </div>
     </div>
-    
-     <!-- Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  </footer>
+@endif
 
-    <!-- Scripts -->
-    <script src="{{ asset('assets/user/js/jquery.min.js') }}"></script>
-    <script src="{{ asset('assets/user/js/popper.min.js') }}"></script>
-    <script src="{{ asset('assets/user/js/bootstrap.min.js') }}"></script>
-    <script src="{{ asset('assets/user/js/jquery.easing.min.js') }}"></script>
-    <script src="{{ asset('assets/user/js/swiper.min.js') }}"></script>
-    <script src="{{ asset('assets/user/js/jquery.magnific-popup.js') }}"></script>
-    <script src="{{ asset('assets/user/js/validator.min.js') }}"></script>
-    <script src="{{ asset('assets/user/js/scripts.js') }}"></script>
+
+  {{-- ================== SCRIPTS ================== --}}
+  {{-- Urutan WAJIB: jQuery -> Popper v1 -> Bootstrap 4 --}}
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" crossorigin="anonymous"></script>
+
+  {{-- Plugin lain SETELAH Bootstrap (pakai aset lokal kamu) --}}
+  <script src="{{ asset('assets/user/js/jquery.easing.min.js') }}"></script>
+  <script src="{{ asset('assets/user/js/swiper.min.js') }}"></script>
+  <script src="{{ asset('assets/user/js/jquery.magnific-popup.js') }}"></script>
+  <script src="{{ asset('assets/user/js/validator.min.js') }}"></script>
+  <script src="{{ asset('assets/user/js/scripts.js') }}"></script>
+
+  {{-- Auto-close menu ketika klik link (khusus mobile) --}}
+  <script>
+    $(function(){
+      $('.navbar-nav .nav-link').on('click', function(){
+        if ($('.navbar-toggler').is(':visible')) {
+          $('#navbarNav').collapse('hide');
+        }
+      });
+    });
+  </script>
+
+  <script>
+  $(function () {
+    // Tutup saat klik link menu (mobile)
+    $('.navbar-nav .nav-link').on('click', function () {
+      if ($('.navbar-toggler').is(':visible')) {
+        $('#navbarNav').collapse('hide');
+      }
+    });
+
+    // Tutup saat klik tombol X (mobile)
+    $('.btn-close-menu').on('click', function (e) {
+      e.preventDefault();
+      $('#navbarNav').collapse('hide');
+    });
+
+    // Jaga agar ikon bars <-> times selalu sinkron
+    var $toggler = $('.navbar-toggler');
+    $('#navbarNav')
+      .on('show.bs.collapse', function () {
+        $toggler.attr('aria-expanded', 'true');
+      })
+      .on('hide.bs.collapse', function () {
+        $toggler.attr('aria-expanded', 'false');
+      });
+  });
+</script>
+
+<script>
+  $(function () {
+    var isHome = "{{ request()->is('/') ? '1' : '0' }}" === '1';
+
+    // Aktifkan & refresh ScrollSpy
+    $('body').scrollspy({ target: '#mainNavbar', offset: 90 });
+    $(window).on('load resize', function(){ $('body').scrollspy('refresh'); });
+
+    // Helper: set active berdasarkan hash (#produk, dll)
+    function setActiveByHash(hash){
+      if(!hash) return;
+      $('#mainNavbar .nav-link').removeClass('active').filter(function(){
+        var href = $(this).attr('href') || '';
+        return href === hash || href.endsWith(hash); // dukung '#id' & '/#id'
+      }).addClass('active');
+    }
+
+    // Smooth-scroll & set active saat klik (hanya di Home)
+    $('.nav-link.page-scroll').on('click', function(e){
+      if (!isHome) return;              // di halaman lain biarkan load ulang ke Home
+      var href = $(this).attr('href');  // '#id'
+      if (href && href.startsWith('#') && $(href).length){
+        e.preventDefault();
+        $('html, body').animate({ scrollTop: $(href).offset().top - 70 }, 500, function(){
+          history.replaceState(null, null, href);
+        });
+        setActiveByHash(href);
+      }
+    });
+
+    // Saat halaman Home dibuka dengan hash (mis. /#produk), set active awal
+    if (isHome && window.location.hash){
+      setActiveByHash(window.location.hash);
+    }
+    $(window).on('hashchange', function(){
+      if (isHome) setActiveByHash(window.location.hash);
+    });
+
+    // Tetap: auto-close menu & sinkron ikon
+    $('.navbar-nav .nav-link').on('click', function () {
+      if ($('.navbar-toggler').is(':visible')) { $('#navbarNav').collapse('hide'); }
+    });
+    $('.btn-close-menu').on('click', function (e) {
+      e.preventDefault(); $('#navbarNav').collapse('hide');
+    });
+    var $toggler = $('.navbar-toggler');
+    $('#navbarNav')
+      .on('show.bs.collapse', function () { $toggler.attr('aria-expanded', 'true'); })
+      .on('hide.bs.collapse', function () { $toggler.attr('aria-expanded', 'false'); });
+  });
+</script>
+
+
+
+
+  @stack('scripts')
 </body>
 </html>

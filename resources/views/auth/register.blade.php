@@ -55,7 +55,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <h1>Sign Up</h1>
-                   <p>Fill out the form below to sign up for Tivo. Already signed up? Then just <a class="white" href="log-in.html">Log In</a></p> 
+                   <p>Already signed up? Then just <a class="white" href="log-in.html">Log In</a></p> 
                     <!-- Sign Up Form -->
                     <div class="form-container">
                     <form  method="POST" action="{{ route('registerStore') }}">
